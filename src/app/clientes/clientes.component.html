@@ -24,7 +24,11 @@
                         <td>{{cliente.cedula}}</td>
                         <td>{{cliente.birthDate.toDateString()}}</td>
                         <td>{{cliente.email}}</td>
-                        <td><button class="btn btn-primary"> Activo</button></td>
+                        <td> 
+                            <button class="btn" [ngClass]="{'btn-primary': !cliente.active, 'btn-danger': cliente.active}" (click) = "toggleActiveState(cliente)" >
+                                {{cliente.active? "Desactivar" : "Activar"}}
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

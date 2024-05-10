@@ -109,4 +109,7 @@ export class DireccionComponent {
     }
   ];
 
+  toggleActiveState(direccion: Direccion) {
+    direccion.active = !direccion.active;
+  }
 }

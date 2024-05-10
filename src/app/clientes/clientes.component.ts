@@ -11,6 +11,10 @@ import { CommonModule } from '@angular/common';
 })
 export class ClientesComponent {
 
+  toggleActiveState(cliente: Cliente) {
+    cliente.active = !cliente.active;
+  }
+
   clientes: Cliente[] = [
     {
       clienteId: 1,
