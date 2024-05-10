@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Direccion } from '../models/direccion';
 import { CommonModule } from '@angular/common';
 import { ActiveButtonComponent } from "../active-button/active-button.component";
+import { CardContainerComponent } from "../card-container/card-container.component";
 
 @Component({
     selector: 'app-direccion',
     standalone: true,
     templateUrl: './direccion.component.html',
     styleUrl: './direccion.component.css',
-    imports: [CommonModule, ActiveButtonComponent]
+    imports: [CommonModule, ActiveButtonComponent, CardContainerComponent]
 })
 export class DireccionComponent {
   direcciones: Direccion[] = [

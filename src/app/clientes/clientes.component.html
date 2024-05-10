@@ -1,36 +1,30 @@
-<div class="card">
-    <div class="card-header">
-        <h4><strong>Clientes</strong></h4>
+<app-card-container [title]="'Clientes'">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ClienteId</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">C&eacute;dula</th>
+                    <th scope="col">BirthDate</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <th scope="row text-center">{{cliente.clienteId}}</th>
+                    <td>{{cliente.name}}</td>
+                    <td>{{cliente.lastName}}</td>
+                    <td>{{cliente.cedula}}</td>
+                    <td>{{cliente.birthDate.toDateString()}}</td>
+                    <td>{{cliente.email}}</td>
+                    <td> 
+                        <app-active-button [active]="cliente.active"></app-active-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="card-body p-2">
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">ClienteId</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">C&eacute;dula</th>
-                        <th scope="col">BirthDate</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let cliente of clientes">
-                        <th scope="row text-center">{{cliente.clienteId}}</th>
-                        <td>{{cliente.name}}</td>
-                        <td>{{cliente.lastName}}</td>
-                        <td>{{cliente.cedula}}</td>
-                        <td>{{cliente.birthDate.toDateString()}}</td>
-                        <td>{{cliente.email}}</td>
-                        <td> 
-                            <app-active-button [active]="cliente.active"></app-active-button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
+</app-card-container>

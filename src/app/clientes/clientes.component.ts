@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { Cliente } from '../models/cliente';
 import { CommonModule } from '@angular/common';
 import { ActiveButtonComponent } from "../active-button/active-button.component";
+import { CardContainerComponent } from "../card-container/card-container.component";
 
 @Component({
     selector: 'app-clientes',
     standalone: true,
     templateUrl: './clientes.component.html',
     styleUrl: './clientes.component.css',
-    imports: [CommonModule, ActiveButtonComponent]
+    imports: [CommonModule, ActiveButtonComponent, CardContainerComponent]
 })
 export class ClientesComponent {
 
