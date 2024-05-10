@@ -29,9 +29,7 @@
                         <td>{{direccion.country}}</td>
                         <td>{{direccion.createAt.toDateString()}}</td>
                         <td> 
-                            <button class="btn" [ngClass]="{'btn-primary': !direccion.active, 'btn-danger': direccion.active}" (click) = "toggleActiveState(direccion)" >
-                                {{direccion.active? "Desactivar" : "Activar"}}
-                            </button>
+                            <app-active-button [active]="direccion.active"></app-active-button>
                         </td>
                     </tr>
                 </tbody>
