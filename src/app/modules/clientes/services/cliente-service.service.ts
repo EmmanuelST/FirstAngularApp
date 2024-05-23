@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from '../../../models/cliente';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,22 @@ export class ClienteServiceService {
     this.initClientes();
   }
 
-  getCliente(clienteId: number): Cliente {
-    let client = this.clientes.find(e => e.clienteId == clienteId);
-    if (client) {
-      return client;
-    }
-    return new Cliente();
+  getClienteById(clienteId: number): Observable<Cliente | undefined> {
+    const client = this.clientes.find(e => e.clienteId == clienteId);
+    return of(client);
   }
 
-  getList() {
-    return this.clientes;
+  getList(): Observable<Array<Cliente>> {
+    return of(this.clientes);
+  }
+
+  updateCliente(cliente: Cliente) {
+    let findedCliente = this.clientes.find(a => a.clienteId === cliente.clienteId)
+    if (findedCliente == undefined) {
+      return;
+    }
+
+    findedCliente = cliente;
   }
 
   initClientes() {
