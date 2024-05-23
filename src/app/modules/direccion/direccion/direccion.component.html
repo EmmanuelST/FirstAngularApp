@@ -1,4 +1,4 @@
-<app-card-container [title]="'Direcciones'">
+<app-card-container [title]="'Direcciones'" *ngIf="direcciones | async as addresses">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let direccion of direcciones">
+                <tr *ngFor="let direccion of addresses">
                     <th scope="row text-center">{{direccion.addressId}}</th>
                     <td>{{direccion.alias}}</td>
                     <td>{{direccion.street}}</td>
@@ -27,6 +27,9 @@
                     <td> 
                         <!-- <app-active-button [active]="direccion.active"></app-active-button> -->
                         <a class="btn btn-primary" [routerLink]="['/direccion',direccion.addressId]">Ver detalles</a>
+                        <button class="btn" [ngClass]="{'btn-success': direccion.active, 'btn-danger': !direccion.active}" (click)="toggleActiveState(direccion)">
+                            {{direccion.active ? "Activo" : "Desactivado"}} 
+                           </button>
                     </td>
                 </tr>
             </tbody>
