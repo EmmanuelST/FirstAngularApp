@@ -1,41 +1,41 @@
-<app-card-container [title]="'Clientes'">
+<app-card-container [title]="'Clientes'"  *ngIf="cliente |async as client">
     <div>
         <div class="row align-items-center">
             <div class="col-6">
                 <label># Cliente</label>
-                <input type="number" class="form-control" [(value)]="cliente.clienteId"/>
+                <input type="number" class="form-control" [(value)]="client.clienteId"/>
             </div>
 
             <div class="col-auto">
                 <label>Activo</label>
-                <input type="checkbox" [(checked)]="cliente.active" />
+                <input type="checkbox" [(checked)]="client.active" />
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <label>Name</label>
-                <input type="text" class="form-control" [(value)]="cliente.name"/>
+                <input type="text" class="form-control" [(value)]="client.name"/>
             </div>
             <div class="col-6">
                 <label>Last Name</label>
-                <input type="text" class="form-control" [(value)]="cliente.lastName"/>
+                <input type="text" class="form-control" [(value)]="client.lastName"/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-6">
                 <label>Cédula</label>
-                <input type="text" class="form-control" [(value)]="cliente.cedula"/>
+                <input type="text" class="form-control" [(value)]="client.cedula"/>
             </div>
             <div class="col-6">
                 <label>Brith Date</label>
-                <input type="text" class="form-control" [(value)]="cliente.birthDate"/>
+                <input type="text" class="form-control" [(value)]="client.birthDate"/>
             </div>
         </div>
 
         <div>
             <label>Email</label>
-            <input type="text" class="form-control" [(value)]="cliente.email"/>
+            <input type="text" class="form-control" [(value)]="client.email"/>
         </div>
     </div>
 </app-card-container>
