@@ -1,0 +1,41 @@
+<app-card-container [title]="'Clientes'">
+    <div>
+        <div class="row align-items-center">
+            <div class="col-6">
+                <label># Cliente</label>
+                <input type="number" class="form-control" [(value)]="cliente.clienteId"/>
+            </div>
+
+            <div class="col-auto">
+                <label>Activo</label>
+                <input type="checkbox" [(checked)]="cliente.active" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>Name</label>
+                <input type="text" class="form-control" [(value)]="cliente.name"/>
+            </div>
+            <div class="col-6">
+                <label>Last Name</label>
+                <input type="text" class="form-control" [(value)]="cliente.lastName"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label>Cédula</label>
+                <input type="text" class="form-control" [(value)]="cliente.cedula"/>
+            </div>
+            <div class="col-6">
+                <label>Brith Date</label>
+                <input type="text" class="form-control" [(value)]="cliente.birthDate"/>
+            </div>
+        </div>
+
+        <div>
+            <label>Email</label>
+            <input type="text" class="form-control" [(value)]="cliente.email"/>
+        </div>
+    </div>
+</app-card-container>

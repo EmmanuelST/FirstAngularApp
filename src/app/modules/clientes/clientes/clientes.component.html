@@ -20,8 +20,9 @@
                     <td>{{cliente.cedula}}</td>
                     <td>{{cliente.birthDate.toDateString()}}</td>
                     <td>{{cliente.email}}</td>
-                    <td> 
-                        <app-active-button [active]="cliente.active"></app-active-button>
+                    <td>
+                        <a class="btn btn-primary m-1" [routerLink]="['/direcciones/',cliente.clienteId]">Ver Direcciones</a>
+                        <a class="btn btn-primary" [routerLink]="['/clientes',cliente.clienteId]">Ver Detalles</a>
                     </td>
                 </tr>
             </tbody>

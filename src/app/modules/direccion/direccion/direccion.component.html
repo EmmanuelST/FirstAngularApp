@@ -25,7 +25,8 @@
                     <td>{{direccion.country}}</td>
                     <td>{{direccion.createAt.toDateString()}}</td>
                     <td> 
-                        <app-active-button [active]="direccion.active"></app-active-button>
+                        <!-- <app-active-button [active]="direccion.active"></app-active-button> -->
+                        <a class="btn btn-primary" [routerLink]="['/direccion',direccion.addressId]">Ver detalles</a>
                     </td>
                 </tr>
             </tbody>
