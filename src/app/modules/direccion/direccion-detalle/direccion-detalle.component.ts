@@ -1,24 +1,54 @@
 import { Component } from '@angular/core';
-import { CardContainerComponent } from "../../../card-container/card-container.component";
 import { DireccionService } from '../services/direccion.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Direccion } from '../../../models/direccion';
+import { Observable, of } from 'rxjs';
 
 @Component({
-    selector: 'app-direccion-detalle',
-    standalone: false,
-    templateUrl: './direccion-detalle.component.html',
-    styleUrl: './direccion-detalle.component.css'
+  selector: 'app-direccion-detalle',
+  standalone: false,
+  templateUrl: './direccion-detalle.component.html',
+  styleUrl: './direccion-detalle.component.css'
 })
 export class DireccionDetalleComponent {
-  constructor(direccionService:DireccionService, routeManager: ActivatedRoute){
-    routeManager.params.subscribe(params => {
-      if(params["id"]){
-        this.direccion = direccionService.getDireccion(params["id"])
-      }
-    })
-      
+
+  direccion: Observable<Direccion | undefined> = of(undefined);
+
+  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute, private router: Router) {
   }
 
-  direccion:Direccion = new Direccion();
+  ngOnInit() {
+    this.routeManager.params.subscribe(params => {
+      if (params["id"]) {
+        this.direccion = this.direccionService.getDireccionById(params["id"]);
+      }
+      else{
+        this.direccion = of(new Direccion());
+      }
+    })
+  }
+
+  onClickEvent(direccion: Direccion)
+  {
+    this.routeManager.params.subscribe(params => {
+      if (params["id"]) {
+        this.submitChanges(direccion)
+      }
+      else{
+        this.insertItem(direccion);
+      }
+    })
+  }
+
+  submitChanges(direccion: Direccion) {
+    this.direccionService.updateDireccion(direccion);
+    this.router.navigate(['/direcciones']);
+  }
+
+  insertItem(direccion: Direccion) {
+
+    direccion.addressId = this.direccionService.getLastId() + 1;
+    this.direccionService.insertDireccion(direccion);
+    this.router.navigate(['/direcciones']);
+  }
 }

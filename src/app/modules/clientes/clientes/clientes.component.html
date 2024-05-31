@@ -1,4 +1,4 @@
-<app-card-container [title]="'Clientes'">
+<app-card-container [title]="'Clientes'" *ngIf="clientes | async as clients" [newButtonRoute]="'/clientesForm'">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let cliente of clientes">
+                <tr  *ngFor="let cliente of clients">
                     <th scope="row text-center">{{cliente.clienteId}}</th>
                     <td>{{cliente.name}}</td>
                     <td>{{cliente.lastName}}</td>
@@ -22,7 +22,10 @@
                     <td>{{cliente.email}}</td>
                     <td>
                         <a class="btn btn-primary m-1" [routerLink]="['/direcciones/',cliente.clienteId]">Ver Direcciones</a>
-                        <a class="btn btn-primary" [routerLink]="['/clientes',cliente.clienteId]">Ver Detalles</a>
+                        <a class="btn btn-primary" [routerLink]="['/clientesForm',cliente.clienteId]">Ver Detalles/Editar</a>
+                        <button class="btn" [ngClass]="{'btn-success': cliente.active, 'btn-danger': !cliente.active}" (click)="toggleActiveState(cliente)">
+                             {{cliente.active ? "Activo" : "Desactivado"}} 
+                            </button>
                     </td>
                 </tr>
             </tbody>

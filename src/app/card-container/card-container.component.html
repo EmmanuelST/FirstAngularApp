@@ -1,6 +1,7 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
         <h4><strong>{{title}}</strong></h4>
+        <a *ngIf="newButtonRoute" class="btn btn-primary" [routerLink]="[newButtonRoute]">Nuevo +</a>
     </div>
     <div class="card-body p-2">        
         <ng-content></ng-content>

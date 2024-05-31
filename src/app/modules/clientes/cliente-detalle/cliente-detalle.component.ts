@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ClienteServiceService } from '../services/cliente-service.service';
 import { Cliente } from '../../../models/cliente';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'app-cliente-detalle',
@@ -11,14 +12,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ClienteDetalleComponent {
 
-  constructor(clienteService:ClienteServiceService, routeManager: ActivatedRoute){
-    routeManager.params.subscribe(params => {
-      if(params["id"]){
-        this.cliente = clienteService.getCliente(params["id"])
-      }
-    })
-      
+  cliente:Observable<Cliente|undefined> = of(undefined);
+
+  constructor(private clienteService:ClienteServiceService, private routeManager: ActivatedRoute, private router: Router){
+    
   }
 
-  cliente:Cliente = new Cliente();
+  ngOnInit(){
+   this.routeManager.params.subscribe(params => {
+      if(params["id"]){
+        this.cliente = this.clienteService.getClienteById(params["id"]);
+      }
+    })
+  }
+
+  submitChanges(client: Cliente)
+  {
+    this.clienteService.updateCliente(client);
+    this.router.navigate([''])
+  }
+
 }

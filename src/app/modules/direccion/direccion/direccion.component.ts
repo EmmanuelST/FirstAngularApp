@@ -1,32 +1,37 @@
 import { Component } from '@angular/core';
 import { Direccion } from '../../../models/direccion';
 import { DireccionService } from '../services/direccion.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
-    selector: 'app-direccion',
-    standalone: false,
-    templateUrl: './direccion.component.html',
-    styleUrl: './direccion.component.css'
+  selector: 'app-direccion',
+  standalone: false,
+  templateUrl: './direccion.component.html',
+  styleUrl: './direccion.component.css'
 })
 export class DireccionComponent {
 
-  constructor(direccionService: DireccionService,routeManager: ActivatedRoute){
-      
-      routeManager.params.subscribe(params => {
-        if(params["id"]){
-          this.direcciones = direccionService.getList(params["id"]);
-        }
-        else{
-          this.direcciones = direccionService.getList(undefined);
-        }
-      })
+  direcciones: Observable<Array<Direccion>> = of(new Array<Direccion>);
+
+  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute, private router: Router) {
+
+  }
+
+  ngOnInit() {
+    this.routeManager.params.subscribe(params => {
+      if (params["id"]) {
+        this.direcciones = this.direccionService.getList(params["id"]);
+      }
+      else {
+        this.direcciones = this.direccionService.getList(undefined);
+      }
+    })
   }
 
 
-  direcciones :Direccion[] = [];
-
   toggleActiveState(direccion: Direccion) {
-    direccion.active = !direccion.active;
+    direccion.active =  !direccion.active;
+    this.direccionService.updateDireccion(direccion);
   }
 }

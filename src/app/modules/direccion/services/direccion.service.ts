@@ -1,14 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Direccion } from '../../../models/direccion';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DireccionService {
-  private direcciones: Direccion[] = [];
+  private direcciones: Array<Direccion> = new Array<Direccion>();
   constructor() {
     this.initDirecciones();
+  }
+
+  getDireccionById(idDireccion: number): Observable<Direccion | undefined> {
+    const direccion = this.direcciones.find(e => e.addressId == idDireccion);
+    return of(direccion)
+  }
+
+  getDireccionByIdNotObservable(idDireccion: number): Direccion | undefined{
+    const direccion = this.direcciones.find(e => e.addressId == idDireccion);
+    return direccion
+  }
+
+  getList(idCliente: any | undefined): Observable<Array<Direccion>> {
+    const result = idCliente ?
+      this.direcciones.filter(a => a.clienteId == idCliente)
+      : this.direcciones;
+
+    return of(result);
+  }
+
+  updateDireccion(direccion: Direccion) {
+    let findedDireccion = this.direcciones.find(a => a.addressId === direccion.addressId)
+    if (findedDireccion == undefined) {
+      return;
+    }
+    findedDireccion = direccion;
+  }
+
+  insertDireccion(direccion: Direccion)
+  {
+    this.direcciones.push(direccion);
+  }
+
+  getLastId():number
+  {
+    return this.direcciones.sort((a,b) =>  a.addressId - b.addressId).pop()?.addressId ?? 0;
   }
 
   private initDirecciones() {
@@ -111,19 +148,5 @@ export class DireccionService {
       }
     ];
   }
-
-  getDireccion(idDireccion: number): Direccion {
-    let direccion = this.direcciones.find(e => e.addressId == idDireccion);
-    if (direccion) {
-      return direccion;
-    }
-    return new Direccion();
-  }
-
-  getList(idCliente: any): Array<Direccion> {
-    if (idCliente) {
-      return this.direcciones.filter(a => a.clienteId == idCliente)
-    }
-    return this.direcciones;
-  }
 }
+

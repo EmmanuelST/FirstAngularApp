@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center ">
+    <div class="col-5">  
+        <app-card-container [title]="'Detalles del Cliente'">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <app-form-input 
+                    [name]="'name'" 
+                    [labelName]="'Nombre'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el nombre del cliente'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'lastName'" 
+                    [labelName]="'Apellido'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el apellido del cliente'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'cedula'" 
+                    [labelName]="'Cédula'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese la cédula del cliente'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'birthDate'" 
+                    [labelName]="'Fecha de Nacimiento'" 
+                    [type]="'datetime'"
+                    [placeHolder]="'Ingrese la fecha de nacimiento del cliente'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'email'" 
+                    [labelName]="'Email'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el email del cliente'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'active'" 
+                    [labelName]="'Activo'" 
+                    [type]="'checkbox'"
+                    [formGroup]="this.form"
+                />
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </app-card-container>
+    </div>
+</div>
