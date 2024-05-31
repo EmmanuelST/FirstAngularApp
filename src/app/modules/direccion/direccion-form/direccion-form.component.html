@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center ">
+    <div class="col-5">
+        <app-card-container [title]="'Detalles del Cliente'">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <app-form-input
+                    [name]="'alias'" 
+                    [labelName]="'Alias'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el alias'"
+                    [formGroup]="this.form" />
+
+                <app-form-input
+                    [name]="'street'" 
+                    [labelName]="'Calle'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese la calle'"
+                    [formGroup]="this.form" 
+                />
+
+                <app-form-input 
+                    [name]="'city'" 
+                    [labelName]="'Ciudad'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese la ciudad'" 
+                    [formGroup]="this.form" 
+                />
+
+                <app-form-input 
+                    [name]="'state'" 
+                    [labelName]="'Provincia o Estado'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el estado'"
+                    [formGroup]="this.form" 
+                />
+
+                <app-form-input 
+                    [name]="'zipCode'"
+                    [labelName]="'ZipCode'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el ZipCode'" 
+                    [formGroup]="this.form" 
+                />
+
+                <app-form-input 
+                    [name]="'country'" 
+                    [labelName]="'Pais'" 
+                    [type]="'text'"
+                    [placeHolder]="'Ingrese el pais'" 
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
+                    [name]="'active'" 
+                    [labelName]="'Activo'" 
+                    [type]="'checkbox'"
+                    [formGroup]="this.form"
+                />
+
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </app-card-container>
+    </div>
+</div>

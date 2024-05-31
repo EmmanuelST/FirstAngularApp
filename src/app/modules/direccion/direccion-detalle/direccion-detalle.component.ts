@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DireccionService } from '../services/direccion.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Direccion } from '../../../models/direccion';
 import { Observable, of } from 'rxjs';
 
@@ -14,11 +14,41 @@ export class DireccionDetalleComponent {
 
   direccion: Observable<Direccion | undefined> = of(undefined);
 
-  constructor(direccionService: DireccionService, routeManager: ActivatedRoute) {
-    routeManager.params.subscribe(params => {
+  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.routeManager.params.subscribe(params => {
       if (params["id"]) {
-        this.direccion = direccionService.getDireccionById(params["id"])
+        this.direccion = this.direccionService.getDireccionById(params["id"]);
+      }
+      else{
+        this.direccion = of(new Direccion());
       }
     })
+  }
+
+  onClickEvent(direccion: Direccion)
+  {
+    this.routeManager.params.subscribe(params => {
+      if (params["id"]) {
+        this.submitChanges(direccion)
+      }
+      else{
+        this.insertItem(direccion);
+      }
+    })
+  }
+
+  submitChanges(direccion: Direccion) {
+    this.direccionService.updateDireccion(direccion);
+    this.router.navigate(['/direcciones']);
+  }
+
+  insertItem(direccion: Direccion) {
+
+    direccion.addressId = this.direccionService.getLastId() + 1;
+    this.direccionService.insertDireccion(direccion);
+    this.router.navigate(['/direcciones']);
   }
 }

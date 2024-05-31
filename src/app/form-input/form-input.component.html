@@ -1,0 +1,13 @@
+<div class="mb-3" [formGroup]="this.formGroup">
+    <label *ngIf="!isCheckbox" for="{{this.name}}" class="form-label">{{labelName}}</label>
+    <input
+        formControlName="{{this.name}}"
+        type="{{this.type}}"
+        name="{{name}}"
+        class="{{ccsClass}}"
+        placeholder="{{this.placeHolder}}"
+        aria-describedby="helpId"
+    />
+    <label *ngIf="isCheckbox" for="{{this.name}}" class="form-label">{{labelName}}</label>
+    <small id="helpId" *ngIf="this.getErrorMessage().trim().length" class=" text-danger">{{this.getErrorMessage()}}</small>
+</div>    

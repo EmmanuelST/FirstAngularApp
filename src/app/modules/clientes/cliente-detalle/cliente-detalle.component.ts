@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ClienteServiceService } from '../services/cliente-service.service';
 import { Cliente } from '../../../models/cliente';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class ClienteDetalleComponent {
 
   cliente:Observable<Cliente|undefined> = of(undefined);
 
-  constructor(private clienteService:ClienteServiceService, private routeManager: ActivatedRoute){
+  constructor(private clienteService:ClienteServiceService, private routeManager: ActivatedRoute, private router: Router){
     
   }
 
@@ -24,6 +24,12 @@ export class ClienteDetalleComponent {
         this.cliente = this.clienteService.getClienteById(params["id"]);
       }
     })
+  }
+
+  submitChanges(client: Cliente)
+  {
+    this.clienteService.updateCliente(client);
+    this.router.navigate([''])
   }
 
 }

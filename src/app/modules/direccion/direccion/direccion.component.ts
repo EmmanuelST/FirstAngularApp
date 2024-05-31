@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Direccion } from '../../../models/direccion';
 import { DireccionService } from '../services/direccion.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class DireccionComponent {
 
   direcciones: Observable<Array<Direccion>> = of(new Array<Direccion>);
 
-  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute) {
+  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute, private router: Router) {
 
   }
 
@@ -34,5 +34,4 @@ export class DireccionComponent {
     direccion.active =  !direccion.active;
     this.direccionService.updateDireccion(direccion);
   }
-
 }

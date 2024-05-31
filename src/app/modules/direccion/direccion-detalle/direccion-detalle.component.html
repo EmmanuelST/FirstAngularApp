@@ -1,48 +1,52 @@
-<app-card-container [title]="'Direcciones'" *ngIf="direccion | async as address">
-    <div>
-        <div class="row align-items-center">
-            <div class="col-6">
-                <label># Dirección</label>
-                <input type="number" class="form-control" [(value)]="address.addressId" />
+<div class="direccion-detalle-container">
+    <app-card-container [title]="'Modificar Direcciones'" *ngIf="direccion | async as address">
+        <div>
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <label># Dirección</label>
+                    <input type="number" class="form-control" [(ngModel)]="address.addressId" />
+                </div>
+                <div class="col-auto">
+                    <label>Activo</label>
+                    <input type="checkbox" [(ngModel)]="address.active"  />
+                </div>
             </div>
-            <div class="col-auto">
-                <label>Activo</label>
-                <input type="checkbox" [(checked)]="address.active" />
+
+            <div class="row">
+                <div class="col-6">
+                    <label>Alias</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.alias" />
+                </div>
+                <div class="col-6">
+                    <label>Street</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.street" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label>City</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.city" />
+                </div>
+                <div class="col-6">
+                    <label>State</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.state" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label>ZipCode</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.zipCode" />
+                </div>
+                <div class="col-6">
+                    <label>country</label>
+                    <input type="text" class="form-control" [(ngModel)]="address.country" />
+                </div>
+            </div>
+            <div class="p-2 d-flex justify-content-center">
+                <button class="btn btn-success" (click)="onClickEvent(address)">Guardar Cambios</button>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-6">
-                <label>Alias</label>
-                <input type="text" class="form-control" [(value)]="address.alias" />
-            </div>
-            <div class="col-6">
-                <label>Street</label>
-                <input type="text" class="form-control" [(value)]="address.street" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <label>City</label>
-                <input type="text" class="form-control" [(value)]="address.city" />
-            </div>
-            <div class="col-6">
-                <label>State</label>
-                <input type="text" class="form-control" [(value)]="address.state" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6">
-                <label>ZipCode</label>
-                <input type="text" class="form-control" [(value)]="address.zipCode" />
-            </div>
-            <div class="col-6">
-                <label>country</label>
-                <input type="text" class="form-control" [(value)]="address.country" />
-            </div>
-        </div>
-
-    </div>
-</app-card-container>
+    </app-card-container>
+</div>

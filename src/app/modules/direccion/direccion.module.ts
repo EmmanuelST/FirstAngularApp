@@ -6,19 +6,25 @@ import { ActiveButtonComponent } from '../../active-button/active-button.compone
 import { CardContainerComponent } from '../../card-container/card-container.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { DireccionDetalleComponent } from './direccion-detalle/direccion-detalle.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DireccionFormComponent } from './direccion-form/direccion-form.component';
+import { FormInputComponent } from '../../form-input/form-input.component';
 
 
 @NgModule({
   declarations: [
     DireccionComponent,
-    DireccionDetalleComponent
+    DireccionDetalleComponent,
+    DireccionFormComponent
   ],
   imports: [
     CommonModule,
     DireccionRoutingModule,
-    CommonModule,
     ActiveButtonComponent,
     CardContainerComponent,
+    FormInputComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DireccionModule { }

@@ -17,6 +17,12 @@ export class ClienteServiceService {
     return of(client);
   }
 
+  getClienteByIdNotObservable(clienteId: number): Cliente | undefined {
+    const client = this.clientes.find(e => e.clienteId == clienteId);
+    return client;
+  }
+
+
   getList(): Observable<Array<Cliente>> {
     return of(this.clientes);
   }
@@ -26,8 +32,12 @@ export class ClienteServiceService {
     if (findedCliente == undefined) {
       return;
     }
-
     findedCliente = cliente;
+  }
+
+  insertDireccion(cliente: Cliente)
+  {
+    this.clientes.push(cliente);
   }
 
   initClientes() {

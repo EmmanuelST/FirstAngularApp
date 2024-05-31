@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 
 export class DireccionService {
-  private direcciones: Direccion[] = [];
+  private direcciones: Array<Direccion> = new Array<Direccion>();
   constructor() {
     this.initDirecciones();
   }
@@ -15,6 +15,11 @@ export class DireccionService {
   getDireccionById(idDireccion: number): Observable<Direccion | undefined> {
     const direccion = this.direcciones.find(e => e.addressId == idDireccion);
     return of(direccion)
+  }
+
+  getDireccionByIdNotObservable(idDireccion: number): Direccion | undefined{
+    const direccion = this.direcciones.find(e => e.addressId == idDireccion);
+    return direccion
   }
 
   getList(idCliente: any | undefined): Observable<Array<Direccion>> {
@@ -30,8 +35,17 @@ export class DireccionService {
     if (findedDireccion == undefined) {
       return;
     }
-
     findedDireccion = direccion;
+  }
+
+  insertDireccion(direccion: Direccion)
+  {
+    this.direcciones.push(direccion);
+  }
+
+  getLastId():number
+  {
+    return this.direcciones.sort((a,b) =>  a.addressId - b.addressId).pop()?.addressId ?? 0;
   }
 
   private initDirecciones() {
