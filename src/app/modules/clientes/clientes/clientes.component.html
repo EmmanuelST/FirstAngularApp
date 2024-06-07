@@ -1,4 +1,4 @@
-<app-card-container [title]="'Clientes'" *ngIf="clientes | async as clients" [newButtonRoute]="'/clientesForm'">
+<app-card-container [title]="'Clientes'" *ngIf="clientes" [newButtonRoute]="'/clientesForm'">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -13,12 +13,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr  *ngFor="let cliente of clients">
+                <tr  *ngFor="let cliente of clientes">
                     <th scope="row text-center">{{cliente.clienteId}}</th>
                     <td>{{cliente.name}}</td>
                     <td>{{cliente.lastName}}</td>
                     <td>{{cliente.cedula}}</td>
-                    <td>{{cliente.birthDate.toDateString()}}</td>
+                    <td>{{cliente.birthDate}}</td>
                     <td>{{cliente.email}}</td>
                     <td>
                         <a class="btn btn-primary m-1" [routerLink]="['/direcciones/',cliente.clienteId]">Ver Direcciones</a>

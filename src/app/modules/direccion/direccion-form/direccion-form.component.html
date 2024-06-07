@@ -51,6 +51,13 @@
                 />
 
                 <app-form-input 
+                    [name]="'clienteId'" 
+                    [labelName]="'clienteId'" 
+                    [type]="'number'"
+                    [formGroup]="this.form"
+                />
+
+                <app-form-input 
                     [name]="'active'" 
                     [labelName]="'Activo'" 
                     [type]="'checkbox'"
@@ -62,3 +69,7 @@
         </app-card-container>
     </div>
 </div>
+
+<dialog open *ngIf="direccion == null">
+<h4>No encontrado o buscando</h4>
+</dialog>

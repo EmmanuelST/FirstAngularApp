@@ -41,14 +41,14 @@ export class DireccionDetalleComponent {
   }
 
   submitChanges(direccion: Direccion) {
-    this.direccionService.updateDireccion(direccion);
+    this.direccionService.upsertDireccion(direccion);
     this.router.navigate(['/direcciones']);
   }
 
   insertItem(direccion: Direccion) {
 
     direccion.addressId = this.direccionService.getLastId() + 1;
-    this.direccionService.insertDireccion(direccion);
+    this.direccionService.upsertDireccion(direccion);
     this.router.navigate(['/direcciones']);
   }
 }

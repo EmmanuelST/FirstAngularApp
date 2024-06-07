@@ -1,4 +1,4 @@
-<app-card-container [title]="'Direcciones'" *ngIf="direcciones | async as addresses" [newButtonRoute]="'/direccionForm'">
+<app-card-container [title]="'Direcciones'" *ngIf="direcciones" [newButtonRoute]="'/direccionForm'">
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let direccion of addresses">
+                <tr *ngFor="let direccion of direcciones">
                     <th scope="row text-center">{{direccion.addressId}}</th>
                     <td>{{direccion.alias}}</td>
                     <td>{{direccion.street}}</td>
@@ -23,7 +23,7 @@
                     <td>{{direccion.state}}</td>
                     <td>{{direccion.zipCode}}</td>
                     <td>{{direccion.country}}</td>
-                    <td>{{direccion.createAt.toDateString()}}</td>
+                    <td>{{direccion.createdAt}}</td>
                     <td> 
                         <!-- <app-active-button [active]="direccion.active"></app-active-button> -->
                         <a class="btn btn-primary" [routerLink]="['/direccionForm',direccion.addressId]">Ver detalles/Editar</a>

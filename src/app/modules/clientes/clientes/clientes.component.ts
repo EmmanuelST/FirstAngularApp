@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Cliente } from '../../../models/cliente';
 import { ClienteServiceService } from '../services/cliente-service.service';
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-clientes',
@@ -10,18 +9,25 @@ import { Observable, of } from 'rxjs';
   styleUrl: './clientes.component.css'
 })
 export class ClientesComponent {
-  clientes : Observable<Array<Cliente>> = of(new Array<Cliente>);
+  clientes: Array<Cliente> = new Array<Cliente>;
 
   constructor(private clienteService: ClienteServiceService) {
-    
+
   }
 
-  ngOnInit(){
-    this.clientes = this.clienteService.getList();
+  ngOnInit() {
+    this.clienteService.getList().subscribe({
+      next: (value) => {
+        this.clientes = value;
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    });
   }
 
   toggleActiveState(cliente: Cliente) {
     cliente.active = !cliente.active;
-    this.clienteService.updateCliente(cliente)
+    this.clienteService.upsertCliente(cliente)
   }
 }

@@ -40,14 +40,17 @@ export class ClienteFormComponent {
         return;
       }
 
-      const result = this.clienteService.getClienteByIdNotObservable(params["id"]);
-
-      if (result == null) {
-        return;
-      }
-
-      this.form.patchValue(result);
-      this.cliente = result;
+      this.clienteService.getClienteById(params["id"]).subscribe({
+        next: (value) => {
+          this.form.patchValue(value);
+          this.cliente = value;
+        },
+        error: (error) => {
+          console.log(error);
+          this.form.patchValue(new Cliente());
+          this.cliente = new Cliente();
+        }
+      });
     })
   }
 
@@ -56,20 +59,19 @@ export class ClienteFormComponent {
     console.info('Valor del formulario:', this.form.value);
     console.info('El formulario es valido:', this.form.valid);
 
-    if(this.form.valid && this.cliente)
-      {
-        const formValue = this.form.value;
-        this.cliente.name = formValue.name;
-        this.cliente.lastName = formValue.lastName;
-        this.cliente.cedula = formValue.cedula;
-        this.cliente.email = formValue.email
-        this.cliente.birthDate = formValue.birthDate
-        this.cliente.active = formValue.active
+    if (this.form.valid && this.cliente) {
+      const formValue = this.form.value;
+      this.cliente.name = formValue.name;
+      this.cliente.lastName = formValue.lastName;
+      this.cliente.cedula = formValue.cedula;
+      this.cliente.email = formValue.email;
+      this.cliente.birthDate = formValue.birthDate;
+      this.cliente.active = formValue.active === "true";
 
-        this.clienteService.updateCliente(this.cliente);
-        this.router.navigate([''])
-      }
-    
+      this.clienteService.upsertCliente(this.cliente);
+      this.router.navigate([''])
+    }
+
   }
 
 }

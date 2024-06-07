@@ -27,27 +27,29 @@ export class DireccionFormComponent {
         zipCode: ['', Validators.required],
         country: ['', Validators.required],
         active: [true, Validators.required],
+        clienteId: [0, Validators.required],
       }
     )
   }
 
- 
+
   ngOnInit() {
     this.routeManager.params.subscribe(params => {
       this.direccionId = params["id"]
-
+      console.log(params);
       if (this.direccionId === null) {
         return;
       }
 
-      const result = this.direccionService.getDireccionByIdNotObservable(params["id"]);
-
-      if (result == null) {
-        return;
-      }
-
-      this.form.patchValue(result);
-      this.direccion = result;
+      this.direccionService.getDireccionById(params["id"]).subscribe({
+        next: (value) => {
+          this.form.patchValue(value);
+          this.direccion = value;
+        },
+        error:(error) => {
+          console.log(error);
+        }
+      });
     })
   }
 
@@ -56,21 +58,21 @@ export class DireccionFormComponent {
     console.info('Valor del formulario:', this.form.value);
     console.info('El formulario es valido:', this.form.valid);
 
-    if(this.form.valid && this.direccion)
-      {
-        const formValue = this.form.value;
-        this.direccion.alias = formValue.alias;
-        this.direccion.street = formValue.street;
-        this.direccion.city = formValue.city;
-        this.direccion.state = formValue.state
-        this.direccion.zipCode = formValue.zipCode
-        this.direccion.country = formValue.country
-        this.direccion.active = formValue.active
+    if (this.form.valid && this.direccion) {
+      const formValue = this.form.value;
+      this.direccion.alias = formValue.alias;
+      this.direccion.street = formValue.street;
+      this.direccion.city = formValue.city;
+      this.direccion.state = formValue.state;
+      this.direccion.zipCode = formValue.zipCode;
+      this.direccion.country = formValue.country;
+      this.direccion.active = formValue.active === "true";
+      this.direccion.clienteId = Number(formValue.clienteId);
 
-        this.direccionService.updateDireccion(this.direccion);
-        this.router.navigate(['direcciones'])
-      }
-    
+      this.direccionService.upsertDireccion(this.direccion);
+      this.router.navigate(['direcciones']);
+    }
+
   }
 
 }

@@ -10,6 +10,8 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { FormInputComponent } from '../../form-input/form-input.component';
+import {  HttpClientModule } from '@angular/common/http';
+import { ClienteServiceService } from './services/cliente-service.service';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { FormInputComponent } from '../../form-input/form-input.component';
     CardContainerComponent,
     FormInputComponent,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers:[ClienteServiceService]
 })
 export class ClientesModule { }

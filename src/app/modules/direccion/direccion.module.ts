@@ -9,6 +9,8 @@ import { DireccionDetalleComponent } from './direccion-detalle/direccion-detalle
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DireccionFormComponent } from './direccion-form/direccion-form.component';
 import { FormInputComponent } from '../../form-input/form-input.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DireccionService } from './services/direccion.service';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FormInputComponent } from '../../form-input/form-input.component';
     CardContainerComponent,
     FormInputComponent,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [DireccionService]
 })
 export class DireccionModule { }

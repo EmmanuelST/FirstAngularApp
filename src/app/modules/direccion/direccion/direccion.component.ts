@@ -12,26 +12,36 @@ import { Observable, of } from 'rxjs';
 })
 export class DireccionComponent {
 
-  direcciones: Observable<Array<Direccion>> = of(new Array<Direccion>);
+  direcciones: Array<Direccion> = new Array<Direccion>;
 
-  constructor(private direccionService: DireccionService, private routeManager: ActivatedRoute, private router: Router) {
+  constructor(private direccionService: DireccionService,
+    private routeManager: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    console.log("Direcciones inició");
+    this.loadData();
+  }
+  
+
+  loadData() {
     this.routeManager.params.subscribe(params => {
-      if (params["id"]) {
-        this.direcciones = this.direccionService.getList(params["id"]);
-      }
-      else {
-        this.direcciones = this.direccionService.getList(undefined);
-      }
+      console.log(params);
+      this.direccionService.getList(params["id"]).subscribe({
+        next: (value) => {
+          this.direcciones = value;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
     })
   }
 
 
   toggleActiveState(direccion: Direccion) {
-    direccion.active =  !direccion.active;
-    this.direccionService.updateDireccion(direccion);
+    direccion.active = !direccion.active;
+    this.direccionService.upsertDireccion(direccion);
   }
 }
